@@ -5,7 +5,8 @@ $onepress_counter_title    = get_theme_mod( 'onepress_counter_title', __('Our Nu
 $onepress_counter_subtitle = get_theme_mod( 'onepress_counter_subtitle', __('Some Fun Facts', 'onepress' ));
 ?>
 <?php if ( $onepress_counter_disable != '1' ) : ?>
-<section id="<?php if ( $onepress_counter_id != '' ) echo $onepress_counter_id; ?>" class="section-padding section-counter onepage-section">
+<section id="<?php if ( $onepress_counter_id != '' ) echo $onepress_counter_id; ?>" class="<?php echo apply_filters( 'onepress_section_class', 'section-padding section-counter onepage-section', 'counter' ); ?>">
+	<?php do_action( 'onperess_before_section_inner', 'counter' ); ?>
 	<div class="container">
 
 		<div class="section-title-area">
@@ -116,5 +117,6 @@ $onepress_counter_subtitle = get_theme_mod( 'onepress_counter_subtitle', __('Som
 		</div>
 
 	</div>
+	<?php do_action( 'onperess_after_section_inner', 'counter' ); ?>
 </section>
 <?php endif; ?>

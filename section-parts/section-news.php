@@ -8,7 +8,8 @@ $onepress_news_more_link = get_theme_mod( 'onepress_news_more_link', '#' );
 $onepress_news_more_text = get_theme_mod( 'onepress_news_more_text', __('Read Our Blog', 'onepress' ));
 ?>
 <?php if ( ! $onepress_news_disable  ) : ?>
-<section id="<?php if ( $onepress_news_id != '' ) echo $onepress_news_id; ?>" class="section-padding section-news onepage-section">
+<section id="<?php if ( $onepress_news_id != '' ) echo $onepress_news_id; ?>" class="<?php echo apply_filters( 'onepress_section_class', 'section-padding section-news onepage-section', 'news' ); ?>">
+	<?php do_action( 'onperess_before_section_inner', 'news' ); ?>
 	<div class="container">
 		<div class="section-title-area">
 			<?php if ( $onepress_news_subtitle != '' ) echo '<h5 class="section-subtitle">' . esc_html( $onepress_news_subtitle ) . '</h5>'; ?>
@@ -49,5 +50,6 @@ $onepress_news_more_text = get_theme_mod( 'onepress_news_more_text', __('Read Ou
 
 		</div>
 	</div>
+	<?php do_action( 'onperess_after_section_inner', 'news' ); ?>
 </section>
 <?php endif; ?>

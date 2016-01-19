@@ -5,7 +5,8 @@ $onepress_about_title    = get_theme_mod( 'onepress_about_title', __('More About
 $onepress_about_subtitle = get_theme_mod( 'onepress_about_subtitle', __('We are a digital studio', 'onepress' ));
 ?>
 <?php if ( ! $onepress_about_disable  ) { ?>
-	<section id="<?php if ( $onepress_about_id != '' ) { echo $onepress_about_id; }; ?>" class="section-padding section-about onepage-section">
+	<section id="<?php if ( $onepress_about_id != '' ) { echo $onepress_about_id; }; ?>" class="<?php echo apply_filters( 'onepress_section_class', 'section-padding section-about onepage-section', 'about' ); ?>">
+		<?php do_action( 'onperess_before_section_inner', 'about' ); ?>
 		<div class="container">
 			<div class="section-title-area">
 				<?php if ( $onepress_about_subtitle != '' ) {  echo '<h5 class="section-subtitle">' . esc_html( $onepress_about_subtitle ) . '</h5>'; } ?>
@@ -101,5 +102,6 @@ $onepress_about_subtitle = get_theme_mod( 'onepress_about_subtitle', __('We are 
 				?>
 			</div>
 		</div>
+		<?php do_action( 'onperess_after_section_inner', 'about' ); ?>
 	</section>
 <?php } ?>

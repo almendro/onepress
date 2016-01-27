@@ -21,14 +21,17 @@ function onepress_admin_notice() {
 		$theme_data = wp_get_theme();
 		?>
 		<div class="updated notice is-dismissible">
-			<p><?php printf( __( 'Welcome! Thank you for choosing %1$s One! To fully take advantage of the best our theme can offer please make sure you visit our <a href="%2$s">Welcome page</a>', 'onepress' ),  $theme_data->Name, admin_url( 'themes.php?page=ft_onepress' )  ); ?></p>
+			<p><?php printf( __( 'Welcome! Thank you for choosing %1$s To fully take advantage of the best our theme can offer please make sure you visit our <a href="%2$s">Welcome page</a>', 'onepress' ),  $theme_data->Name, admin_url( 'themes.php?page=ft_onepress' )  ); ?></p>
 		</div>
 		<?php
 	}
 }
 
 function onepress_one_activation_admin_notice(){
-	add_action( 'admin_notices', 'onepress_admin_notice' );
+	global $pagenow;
+	if ( is_admin() && ('themes.php' == $pagenow) && isset( $_GET['activated'] ) ) {
+		add_action( 'admin_notices', 'onepress_admin_notice' );
+	}
 }
 
 /* activation notice */
@@ -39,12 +42,12 @@ function onepress_theme_info_page() {
 	$theme_data = wp_get_theme();
 
 	if ( isset( $_GET['onpress_action_dismiss'] ) ) {
-		$actions_dismiss =  get_option( 'onpress_actions_dismiss' );
+		$actions_dismiss =  get_option( 'onepress_actions_dismiss' );
 		if ( ! is_array( $actions_dismiss ) ) {
 			$actions_dismiss = array();
 		}
 		$actions_dismiss[ stripslashes( $_GET['onpress_action_dismiss'] ) ] = 'dismiss';
-		update_option( 'onpress_actions_dismiss', $actions_dismiss );
+		update_option( 'onepress_actions_dismiss', $actions_dismiss );
 	}
 
 	// Check for current viewing tab
@@ -117,7 +120,7 @@ function onepress_theme_info_page() {
 			<?php $actions = wp_parse_args( $actions, array( 'page_on_front' => '', 'page_template' ) ) ?>
 			<?php if ( $actions['page_on_front'] == 'active' ) {  ?>
 				<div class="theme_link  action-required">
-					<a title="<?php  esc_attr_e( 'Dismiss', 'onpress' ); ?>" class="dismiss" href="<?php echo add_query_arg( array( 'onpress_action_dismiss' => 'page_on_front' ), $current_action_link ); ?>"><span class="dashicons dashicons-dismiss"></span></a>
+					<a title="<?php  esc_attr_e( 'Dismiss', 'onpress' ); ?>" class="dismiss" href="<?php echo add_query_arg( array( 'onepress_actions_dismiss' => 'page_on_front' ), $current_action_link ); ?>"><span class="dashicons dashicons-dismiss"></span></a>
 					<h3><?php esc_html_e( '1. Switch "Front page displays" to "A static page"', 'onepress' ); ?></h3>
 					<div class="about">
 						<p><?php _e( 'In order to have the one page look for your website, please go to Customize -&gt; Static Front Page and switch "Front page displays" to "A static page".', 'onpress' ); ?></p>
@@ -130,7 +133,7 @@ function onepress_theme_info_page() {
 
 			<?php if ( $actions['page_template'] == 'active' ) {  ?>
 				<div class="theme_link  action-required">
-					<a  title="<?php  esc_attr_e( 'Dismiss', 'onpress' ); ?>" class="dismiss" href="<?php echo add_query_arg( array( 'onpress_action_dismiss' => 'page_template' ), $current_action_link ); ?>"><span class="dashicons dashicons-dismiss"></span></a>
+					<a  title="<?php  esc_attr_e( 'Dismiss', 'onpress' ); ?>" class="dismiss" href="<?php echo add_query_arg( array( 'onepress_actions_dismiss' => 'page_template' ), $current_action_link ); ?>"><span class="dashicons dashicons-dismiss"></span></a>
 					<h3><?php esc_html_e( '2.Select the template "Frontpage" for that selected page."', 'onepress' ); ?></h3>
 
 					<div class="about">
@@ -147,7 +150,7 @@ function onepress_theme_info_page() {
 
 						}
 
-						if ( $front_page> 0 && get_post_meta( $front_page, '_wp_page_template', true ) == 'template-frontpage.php' ) {
+						if ( $front_page > 0 && get_post_meta( $front_page, '_wp_page_template', true ) != 'template-frontpage.php' ) {
 							?>
 							<a href="<?php echo get_edit_post_link( $front_page ); ?>" class="button"><?php esc_html_e('Setup frontpage', 'onepress'); ?></a>
 							<?php

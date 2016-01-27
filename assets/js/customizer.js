@@ -193,10 +193,7 @@ var RepeatableCustomize = function (  control  ){
 			}
 
 		} else {
-			console.log(  $context );
-			console.log(  control.params.title_format );
-			console.log(  control.params.live_title_id  );
-
+			
 			//$('.widget-title .live-title', $context).text( control.params.title_format );
 		}
 

@@ -164,7 +164,7 @@ var RepeatableCustomize = function (  control  ){
 			if ( control.params.live_title_id && $( "[data-live-id='"+ control.params.live_title_id+"']", $context ).length > 0 ) {
 				var v = $("[data-live-id='" + control.params.live_title_id + "']", $context).eq(0).val();
 				if (v == '') {
-					v = '[Untitled]';
+					v = 'Item';
 				}
 
 				if (typeof control.params.title_format !== "undefined" && control.params.title_format !== '') {
@@ -193,8 +193,11 @@ var RepeatableCustomize = function (  control  ){
 			}
 
 		} else {
-			//console.log(  control.params.title_format );
-			$('.widget-title .live-title', $context).text( control.params.title_format );
+			console.log(  $context );
+			console.log(  control.params.title_format );
+			console.log(  control.params.live_title_id  );
+
+			//$('.widget-title .live-title', $context).text( control.params.title_format );
 		}
 
 		// Remove item

@@ -354,7 +354,7 @@ function onepress_get_actions_required( ) {
 	}
 
 	$actions = apply_filters( 'onepress_get_actions_required', $actions );
-	$actions_dismiss =  get_option( 'onpress_actions_dismiss' );
+	$actions_dismiss =  get_option( 'onepress_actions_dismiss' );
 
 	if (  $actions_dismiss && is_array( $actions_dismiss ) ) {
 		foreach ( $actions_dismiss as $k => $v ) {
@@ -368,7 +368,7 @@ function onepress_get_actions_required( ) {
 }
 
 
-add_action('switch_theme', 'onpress_reset_actions_required');
-function onpress_reset_actions_required () {
-	delete_option('onpress_actions_dismiss');
+add_action('switch_theme', 'onepress_reset_actions_required');
+function onepress_reset_actions_required () {
+	delete_option('onepress_actions_dismiss');
 }

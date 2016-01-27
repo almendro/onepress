@@ -41,12 +41,12 @@ function onepress_theme_info_page() {
 
 	$theme_data = wp_get_theme();
 
-	if ( isset( $_GET['onpress_action_dismiss'] ) ) {
+	if ( isset( $_GET['onepress_action_dismiss'] ) ) {
 		$actions_dismiss =  get_option( 'onepress_actions_dismiss' );
 		if ( ! is_array( $actions_dismiss ) ) {
 			$actions_dismiss = array();
 		}
-		$actions_dismiss[ stripslashes( $_GET['onpress_action_dismiss'] ) ] = 'dismiss';
+		$actions_dismiss[ stripslashes( $_GET['onepress_action_dismiss'] ) ] = 'dismiss';
 		update_option( 'onepress_actions_dismiss', $actions_dismiss );
 	}
 
@@ -120,10 +120,10 @@ function onepress_theme_info_page() {
 			<?php $actions = wp_parse_args( $actions, array( 'page_on_front' => '', 'page_template' ) ) ?>
 			<?php if ( $actions['page_on_front'] == 'active' ) {  ?>
 				<div class="theme_link  action-required">
-					<a title="<?php  esc_attr_e( 'Dismiss', 'onpress' ); ?>" class="dismiss" href="<?php echo add_query_arg( array( 'onepress_actions_dismiss' => 'page_on_front' ), $current_action_link ); ?>"><span class="dashicons dashicons-dismiss"></span></a>
+					<a title="<?php  esc_attr_e( 'Dismiss', 'onepress' ); ?>" class="dismiss" href="<?php echo add_query_arg( array( 'onepress_action_dismiss' => 'page_on_front' ), $current_action_link ); ?>"><span class="dashicons dashicons-dismiss"></span></a>
 					<h3><?php esc_html_e( '1. Switch "Front page displays" to "A static page"', 'onepress' ); ?></h3>
 					<div class="about">
-						<p><?php _e( 'In order to have the one page look for your website, please go to Customize -&gt; Static Front Page and switch "Front page displays" to "A static page".', 'onpress' ); ?></p>
+						<p><?php _e( 'In order to have the one page look for your website, please go to Customize -&gt; Static Front Page and switch "Front page displays" to "A static page".', 'onepress' ); ?></p>
 					</div>
 					<p>
 						<a  href="<?php echo admin_url('options-reading.php'); ?>" class="button"><?php esc_html_e('Setup front page displays', 'onepress'); ?></a>
@@ -133,11 +133,11 @@ function onepress_theme_info_page() {
 
 			<?php if ( $actions['page_template'] == 'active' ) {  ?>
 				<div class="theme_link  action-required">
-					<a  title="<?php  esc_attr_e( 'Dismiss', 'onpress' ); ?>" class="dismiss" href="<?php echo add_query_arg( array( 'onepress_actions_dismiss' => 'page_template' ), $current_action_link ); ?>"><span class="dashicons dashicons-dismiss"></span></a>
+					<a  title="<?php  esc_attr_e( 'Dismiss', 'onepress' ); ?>" class="dismiss" href="<?php echo add_query_arg( array( 'onepress_action_dismiss' => 'page_template' ), $current_action_link ); ?>"><span class="dashicons dashicons-dismiss"></span></a>
 					<h3><?php esc_html_e( '2.Select the template "Frontpage" for that selected page."', 'onepress' ); ?></h3>
 
 					<div class="about">
-						<p><?php _e( 'Select the template "Frontpage" for that selected page.', 'onpress' ); ?></p>
+						<p><?php _e( 'Select the template "Frontpage" for that selected page.', 'onepress' ); ?></p>
 
 					</div>
 					<p>
@@ -166,8 +166,8 @@ function onepress_theme_info_page() {
 
 			<?php do_action( 'onpres_required_action_details', $actions ); ?>
 			<?php  } else { ?>
-				<h3><?php  printf( __( 'Keep update with %s', 'onpress' ) , $theme_data->Name ); ?></h3>
-				<p><?php _e( 'Hooray! There are no required actions for you right now.', 'onpress' ); ?></p>
+				<h3><?php  printf( __( 'Keep update with %s', 'onepress' ) , $theme_data->Name ); ?></h3>
+				<p><?php _e( 'Hooray! There are no required actions for you right now.', 'onepress' ); ?></p>
 			<?php } ?>
 		</div>
 		<?php } ?>

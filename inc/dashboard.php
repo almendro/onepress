@@ -21,7 +21,7 @@ function onepress_admin_notice() {
 		$theme_data = wp_get_theme();
 		?>
 		<div class="updated notice is-dismissible">
-			<p><?php printf( __( 'Welcome! Thank you for choosing %1$s To fully take advantage of the best our theme can offer please make sure you visit our <a href="%2$s">Welcome page</a>', 'onepress' ),  $theme_data->Name, admin_url( 'themes.php?page=ft_onepress' )  ); ?></p>
+			<p><?php printf( __( 'Welcome! Thank you for choosing %1$s! To fully take advantage of the best our theme can offer please make sure you visit our <a href="%2$s">Welcome page</a>', 'onepress' ),  $theme_data->Name, admin_url( 'themes.php?page=ft_onepress' )  ); ?></p>
 		</div>
 		<?php
 	}
